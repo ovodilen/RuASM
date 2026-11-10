@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ruasm:json-schema:ruasm-diagnostic-v1",
+  "title": "RUASM JSON diagnostic schema v1",
+  "type": "object",
+  "required": [
+    "code",
+    "message"
+  ],
+  "properties": {
+    "code": {
+      "enum": [
+        "E_SYNTAX",
+        "E_INPUT",
+        "E_OUTPUT",
+        "E_RANGE",
+        "E_IDENTIFIER",
+        "E_DUPLICATE_SYMBOL",
+        "E_UNDEFINED_SYMBOL",
+        "E_SYMBOL_LIMIT",
+        "E_OUTPUT_LIMIT",
+        "E_EQU_CYCLE"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "line": {
+      "description": "1-based source line; 0 when the diagnostic has no source line (for example, an input I/O failure); null when unavailable.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "column": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    }
+  },
+  "additionalProperties": true
+}

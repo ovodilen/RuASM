@@ -1,0 +1,1845 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ruasm:json-schema:ruasm-features-v29",
+  "title": "RUASM feature manifest v29 (BT/BTS/BTR/BTC bit operations)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "compiler",
+    "output",
+    "source",
+    "directives",
+    "data",
+    "expressions",
+    "registers",
+    "instructions",
+    "memory",
+    "symbols",
+    "cli",
+    "statistics",
+    "mnemonics",
+    "intermediate_representation",
+    "isa_model",
+    "register_model"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 29
+    },
+    "compiler": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "host",
+        "target",
+        "self_hosted"
+      ],
+      "properties": {
+        "name": {
+          "const": "RUASM"
+        },
+        "version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "self_hosted": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "format",
+        "max_bytes"
+      ],
+      "properties": {
+        "format": {
+          "type": "string"
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "max_bytes",
+        "max_line_bytes",
+        "max_token_bytes",
+        "case_sensitive",
+        "one_statement_per_line"
+      ],
+      "properties": {
+        "max_bytes": {
+          "const": 196607
+        },
+        "max_line_bytes": {
+          "type": "integer"
+        },
+        "max_token_bytes": {
+          "type": "integer"
+        },
+        "case_sensitive": {
+          "type": "boolean"
+        },
+        "one_statement_per_line": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "directives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "contains": {
+        "const": "DW"
+      }
+    },
+    "data": {
+      "type": "object",
+      "required": [
+        "DB",
+        "DW",
+        "DD",
+        "DQ"
+      ],
+      "properties": {
+        "DB": {
+          "type": "object",
+          "required": [
+            "syntax",
+            "value_range",
+            "width_bytes",
+            "byte_order",
+            "expressions"
+          ],
+          "properties": {
+            "syntax": {
+              "type": "string"
+            },
+            "value_range": {
+              "type": "string"
+            },
+            "width_bytes": {
+              "const": 1
+            },
+            "byte_order": {
+              "const": "little-endian"
+            },
+            "expressions": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        },
+        "DW": {
+          "type": "object",
+          "required": [
+            "syntax",
+            "value_range",
+            "width_bytes",
+            "byte_order",
+            "expressions"
+          ],
+          "properties": {
+            "syntax": {
+              "type": "string"
+            },
+            "value_range": {
+              "type": "string"
+            },
+            "width_bytes": {
+              "const": 2
+            },
+            "byte_order": {
+              "const": "little-endian"
+            },
+            "expressions": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        },
+        "DD": {
+          "type": "object",
+          "required": [
+            "syntax",
+            "value_range",
+            "width_bytes",
+            "byte_order",
+            "expressions"
+          ],
+          "properties": {
+            "syntax": {
+              "type": "string"
+            },
+            "value_range": {
+              "type": "string"
+            },
+            "width_bytes": {
+              "const": 4
+            },
+            "byte_order": {
+              "const": "little-endian"
+            },
+            "expressions": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        },
+        "DQ": {
+          "type": "object",
+          "required": [
+            "syntax",
+            "value_range",
+            "width_bytes",
+            "byte_order",
+            "expressions"
+          ],
+          "properties": {
+            "syntax": {
+              "type": "string"
+            },
+            "value_range": {
+              "type": "string"
+            },
+            "width_bytes": {
+              "const": 8
+            },
+            "byte_order": {
+              "const": "little-endian"
+            },
+            "expressions": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "expressions": {
+      "type": "object"
+    },
+    "registers": {
+      "type": "object",
+      "required": [
+        "r64",
+        "r8",
+        "r32",
+        "r16"
+      ],
+      "properties": {
+        "r64": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 16,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "r8": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 16,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "r32": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 16,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "r16": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 16,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "instructions": {
+      "type": "object",
+      "properties": {
+        "shift": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "SHL r64,imm8",
+              "SHL r64,cl",
+              "SHL r8,imm8",
+              "SHL r8,cl",
+              "SHR r64,imm8",
+              "SHR r64,cl",
+              "SHR r8,imm8",
+              "SHR r8,cl",
+              "SAR r64,imm8",
+              "SAR r64,cl",
+              "SAR r8,imm8",
+              "SAR r8,cl"
+            ]
+          },
+          "minItems": 12,
+          "maxItems": 12,
+          "uniqueItems": true
+        },
+        "rotate": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ROL r64,imm8",
+              "ROL r64,cl",
+              "ROL r8,imm8",
+              "ROL r8,cl",
+              "ROR r64,imm8",
+              "ROR r64,cl",
+              "ROR r8,imm8",
+              "ROR r8,cl",
+              "RCL r64,imm8",
+              "RCL r64,cl",
+              "RCL r8,imm8",
+              "RCL r8,cl",
+              "RCR r64,imm8",
+              "RCR r64,cl",
+              "RCR r8,imm8",
+              "RCR r8,cl"
+            ]
+          },
+          "minItems": 16,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "byte_order": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "BSWAP r32",
+              "BSWAP r64"
+            ]
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "extend": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "MOVZX r16,r8",
+              "MOVZX r32,r8",
+              "MOVZX r64,r8",
+              "MOVZX r16,[mem]",
+              "MOVZX r32,[mem]",
+              "MOVZX r64,[mem]",
+              "MOVSX r16,r8",
+              "MOVSX r32,r8",
+              "MOVSX r64,r8",
+              "MOVSX r16,[mem]",
+              "MOVSX r32,[mem]",
+              "MOVSX r64,[mem]"
+            ]
+          },
+          "minItems": 12,
+          "maxItems": 12,
+          "uniqueItems": true
+        },
+        "multiply_divide": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "MUL r64",
+              "MUL r8",
+              "IMUL r64",
+              "IMUL r8",
+              "DIV r64",
+              "DIV r8",
+              "IDIV r64",
+              "IDIV r8"
+            ]
+          },
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "alu": {
+          "type": "object",
+          "required": [
+            "mnemonics",
+            "widths",
+            "operand_forms"
+          ],
+          "properties": {
+            "mnemonics": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "ADD",
+                  "ADC",
+                  "SBB",
+                  "SUB",
+                  "AND",
+                  "OR",
+                  "XOR",
+                  "CMP"
+                ]
+              },
+              "minItems": 8,
+              "maxItems": 8,
+              "uniqueItems": true
+            },
+            "widths": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "r8",
+                  "r16",
+                  "r32",
+                  "r64"
+                ]
+              },
+              "minItems": 4,
+              "maxItems": 4,
+              "uniqueItems": true
+            },
+            "operand_forms": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "register,register",
+                  "register,immediate"
+                ]
+              },
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "test": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "TEST r64,r64",
+              "TEST r64,imm32",
+              "TEST r8,r8",
+              "TEST r8,imm8",
+              "TEST r32,r32",
+              "TEST r32,imm32",
+              "TEST r16,r16",
+              "TEST r16,imm16"
+            ]
+          },
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "branches": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "JMP label",
+              "CALL label",
+              "JO label",
+              "JNO label",
+              "JB label",
+              "JAE label",
+              "JE label",
+              "JNE label",
+              "JBE label",
+              "JA label",
+              "JS label",
+              "JNS label",
+              "JP label",
+              "JNP label",
+              "JL label",
+              "JGE label",
+              "JLE label",
+              "JG label",
+              "JZ label",
+              "JNZ label"
+            ]
+          },
+          "minItems": 20,
+          "maxItems": 20,
+          "uniqueItems": true
+        },
+        "branch_encoding": {
+          "const": "automatic-rel8-rel32"
+        },
+        "branch_relaxation": {
+          "type": "object",
+          "required": [
+            "algorithm",
+            "short_displacement",
+            "near_displacement",
+            "relaxed_mnemonics",
+            "call"
+          ],
+          "properties": {
+            "algorithm": {
+              "const": "monotonic-fixed-point"
+            },
+            "short_displacement": {
+              "const": "signed-8-bit"
+            },
+            "near_displacement": {
+              "const": "signed-32-bit"
+            },
+            "relaxed_mnemonics": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "JMP",
+                  "JO",
+                  "JNO",
+                  "JB",
+                  "JAE",
+                  "JE",
+                  "JNE",
+                  "JBE",
+                  "JA",
+                  "JS",
+                  "JNS",
+                  "JP",
+                  "JNP",
+                  "JL",
+                  "JGE",
+                  "JLE",
+                  "JG",
+                  "JZ",
+                  "JNZ"
+                ]
+              },
+              "minItems": 19,
+              "maxItems": 19,
+              "uniqueItems": true
+            },
+            "call": {
+              "const": "signed-32-bit"
+            }
+          },
+          "additionalProperties": false
+        },
+        "alu_memory": {
+          "type": "object",
+          "required": [
+            "mnemonics",
+            "widths",
+            "operand_orders"
+          ],
+          "properties": {
+            "mnemonics": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "ADD",
+                  "ADC",
+                  "SBB",
+                  "SUB",
+                  "AND",
+                  "OR",
+                  "XOR",
+                  "CMP"
+                ]
+              },
+              "minItems": 8,
+              "maxItems": 8,
+              "uniqueItems": true
+            },
+            "widths": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "r8",
+                  "r16",
+                  "r32",
+                  "r64"
+                ]
+              },
+              "minItems": 4,
+              "maxItems": 4,
+              "uniqueItems": true
+            },
+            "operand_orders": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "register,memory",
+                  "memory,register"
+                ]
+              },
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "test_memory": {
+          "type": "object",
+          "required": [
+            "mnemonic",
+            "widths",
+            "operand_orders"
+          ],
+          "properties": {
+            "mnemonic": {
+              "const": "TEST"
+            },
+            "widths": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "r8",
+                  "r16",
+                  "r32",
+                  "r64"
+                ]
+              },
+              "minItems": 4,
+              "maxItems": 4,
+              "uniqueItems": true
+            },
+            "operand_orders": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "register,memory",
+                  "memory,register"
+                ]
+              },
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "mov": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "r64,r64",
+              "r8,r8",
+              "r64,imm",
+              "r64,[base+disp]",
+              "[base+disp],r64",
+              "r8,imm",
+              "r8,[base+disp]",
+              "[base+disp],r8",
+              "r64,[base+index]",
+              "r64,[base+index*scale]",
+              "r64,[base+index+disp]",
+              "r64,[base+index*scale+disp]",
+              "[base+index],r64",
+              "[base+index*scale],r64",
+              "[base+index+disp],r64",
+              "[base+index*scale+disp],r64",
+              "r8,[base+index]",
+              "r8,[base+index*scale]",
+              "r8,[base+index+disp]",
+              "r8,[base+index*scale+disp]",
+              "[base+index],r8",
+              "[base+index*scale],r8",
+              "[base+index+disp],r8",
+              "[base+index*scale+disp],r8",
+              "r32,r32",
+              "r32,imm32",
+              "r32,[base+disp]",
+              "[base+disp],r32",
+              "r32,[base+index]",
+              "r32,[base+index*scale]",
+              "r32,[base+index+disp]",
+              "r32,[base+index*scale+disp]",
+              "[base+index],r32",
+              "[base+index*scale],r32",
+              "[base+index+disp],r32",
+              "[base+index*scale+disp],r32",
+              "r16,r16",
+              "r16,imm16",
+              "r16,[base+disp]",
+              "[base+disp],r16",
+              "r16,[base+index]",
+              "r16,[base+index*scale]",
+              "r16,[base+index+disp]",
+              "r16,[base+index*scale+disp]",
+              "[base+index],r16",
+              "[base+index*scale],r16",
+              "[base+index+disp],r16",
+              "[base+index*scale+disp],r16"
+            ]
+          },
+          "minItems": 48,
+          "maxItems": 48,
+          "uniqueItems": true
+        },
+        "setcc": {
+          "type": "object",
+          "required": [
+            "conditions",
+            "aliases",
+            "operand_form",
+            "memory_width_bytes",
+            "encoding"
+          ],
+          "properties": {
+            "conditions": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "o",
+                  "no",
+                  "b",
+                  "ae",
+                  "e",
+                  "ne",
+                  "be",
+                  "a",
+                  "s",
+                  "ns",
+                  "p",
+                  "np",
+                  "l",
+                  "ge",
+                  "le",
+                  "g"
+                ]
+              },
+              "minItems": 16,
+              "maxItems": 16,
+              "uniqueItems": true
+            },
+            "aliases": {
+              "type": "object",
+              "required": [
+                "z",
+                "nz"
+              ],
+              "properties": {
+                "z": {
+                  "const": "e"
+                },
+                "nz": {
+                  "const": "ne"
+                }
+              },
+              "additionalProperties": false
+            },
+            "operand_form": {
+              "const": "r8_or_memory"
+            },
+            "memory_width_bytes": {
+              "const": 1
+            },
+            "encoding": {
+              "const": "0F 90+cc /0"
+            }
+          },
+          "additionalProperties": false
+        },
+        "cmovcc": {
+          "type": "object",
+          "required": [
+            "condition_source",
+            "widths",
+            "operand_forms",
+            "encoding",
+            "width_policy"
+          ],
+          "properties": {
+            "condition_source": {
+              "const": "setcc"
+            },
+            "widths": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "r16",
+                  "r32",
+                  "r64"
+                ]
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "operand_forms": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "r16,r16",
+                  "r16,[mem]",
+                  "r32,r32",
+                  "r32,[mem]",
+                  "r64,r64",
+                  "r64,[mem]"
+                ]
+              },
+              "minItems": 6,
+              "maxItems": 6,
+              "uniqueItems": true
+            },
+            "encoding": {
+              "const": "0F 40+cc /r"
+            },
+            "width_policy": {
+              "const": "matched-register;memory-inferred"
+            }
+          },
+          "additionalProperties": false
+        },
+        "extend_source": {
+          "type": "object",
+          "required": [
+            "source_width_bytes",
+            "source_operand_forms",
+            "destination_widths",
+            "width_policy",
+            "encodings"
+          ],
+          "properties": {
+            "source_width_bytes": {
+              "const": 1
+            },
+            "source_operand_forms": {
+              "const": [
+                "r8",
+                "memory"
+              ]
+            },
+            "destination_widths": {
+              "const": [
+                "r16",
+                "r32",
+                "r64"
+              ]
+            },
+            "width_policy": {
+              "const": "destination-register; memory source is implicitly byte"
+            },
+            "encodings": {
+              "type": "object",
+              "required": [
+                "MOVZX",
+                "MOVSX"
+              ],
+              "properties": {
+                "MOVZX": {
+                  "const": "0F B6 /r"
+                },
+                "MOVSX": {
+                  "const": "0F BE /r"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "byte_order_encoding": {
+          "const": "0F C8+rd; REX.B for r8d-r15d; REX.W for r64"
+        },
+        "bit_operations": {
+          "type": "object",
+          "required": [
+            "forms",
+            "encoding",
+            "memory_width",
+            "unsupported"
+          ],
+          "properties": {
+            "forms": {
+              "const": [
+                "r16/r32/r64:reg-reg|reg-imm8|mem-reg"
+              ]
+            },
+            "encoding": {
+              "const": "0F A3/AB/B3/BB;0F BA /4..7 ib"
+            },
+            "memory_width": {
+              "const": "register-inferred"
+            },
+            "unsupported": {
+              "const": [
+                "LOCK",
+                "mem-imm8"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "alu",
+        "test",
+        "shift",
+        "rotate",
+        "byte_order",
+        "extend",
+        "multiply_divide",
+        "branches",
+        "branch_encoding",
+        "branch_relaxation",
+        "alu_memory",
+        "test_memory",
+        "setcc",
+        "cmovcc",
+        "extend_source",
+        "byte_order_encoding",
+        "bit_operations"
+      ]
+    },
+    "memory": {
+      "type": "object",
+      "required": [
+        "addressing",
+        "base_registers",
+        "index_registers",
+        "index_register_excludes",
+        "scale_factors",
+        "displacement",
+        "optional_index",
+        "optional_scale",
+        "optional_displacement",
+        "operand_width_policy"
+      ],
+      "properties": {
+        "addressing": {
+          "const": "base+index*scale+displacement"
+        },
+        "base_registers": {
+          "const": "r64"
+        },
+        "index_registers": {
+          "const": "r64"
+        },
+        "index_register_excludes": {
+          "const": [
+            "rsp"
+          ]
+        },
+        "scale_factors": {
+          "const": [
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        "displacement": {
+          "const": "signed-32-bit"
+        },
+        "optional_index": {
+          "const": true
+        },
+        "optional_scale": {
+          "const": true
+        },
+        "optional_displacement": {
+          "const": true
+        },
+        "operand_width_policy": {
+          "const": "inferred-from-register"
+        }
+      },
+      "additionalProperties": true
+    },
+    "symbols": {
+      "type": "object",
+      "required": [
+        "max_count",
+        "resolution",
+        "dependency_graph",
+        "max_iterations"
+      ],
+      "properties": {
+        "max_count": {
+          "const": 1024
+        },
+        "resolution": {
+          "const": "dependency-graph-plus-fixed-point-layout-and-monotonic-branch-relaxation"
+        },
+        "dependency_graph": {
+          "type": "object",
+          "required": [
+            "algorithm",
+            "edge_scope",
+            "ordering",
+            "tie_break",
+            "cycle_diagnostic"
+          ],
+          "properties": {
+            "algorithm": {
+              "const": "Kahn-topological-sort"
+            },
+            "edge_scope": {
+              "const": "EQU-to-EQU references"
+            },
+            "ordering": {
+              "const": "dependencies-first"
+            },
+            "tie_break": {
+              "const": "lowest-symbol-table-index"
+            },
+            "cycle_diagnostic": {
+              "const": "E_EQU_CYCLE"
+            }
+          },
+          "additionalProperties": false
+        },
+        "max_iterations": {
+          "const": 2048
+        }
+      },
+      "additionalProperties": true
+    },
+    "cli": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "statistics": {
+      "type": "object"
+    },
+    "mnemonics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "isa_model": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "record_bytes",
+        "declarative_forms",
+        "remaining_forms",
+        "operand_contracts",
+        "encoding_strategies"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 4
+        },
+        "record_bytes": {
+          "const": 8
+        },
+        "declarative_forms": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "mnemonic",
+                  "operand_form",
+                  "encoding_hex",
+                  "operand_contract_id",
+                  "encoding_strategy_id"
+                ],
+                "properties": {
+                  "mnemonic": {
+                    "type": "string"
+                  },
+                  "operand_form": {
+                    "const": "none"
+                  },
+                  "encoding_hex": {
+                    "type": "string",
+                    "pattern": "^(?:[0-9a-f]{2})+$"
+                  },
+                  "operand_contract_id": {
+                    "const": 1
+                  },
+                  "encoding_strategy_id": {
+                    "const": 1
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "mnemonic",
+                  "operand_form",
+                  "encoding_hex",
+                  "operand_contract_id",
+                  "encoding_strategy_id"
+                ],
+                "properties": {
+                  "mnemonic": {
+                    "type": "string"
+                  },
+                  "operand_form": {
+                    "const": "r64"
+                  },
+                  "encoding_hex": {
+                    "type": "string",
+                    "pattern": "^(?:[0-9a-f]{2})+$"
+                  },
+                  "operand_contract_id": {
+                    "const": 6
+                  },
+                  "encoding_strategy_id": {
+                    "const": 2
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "mnemonic",
+                  "operand_form",
+                  "descriptor_kind",
+                  "descriptor_hex",
+                  "operand_contract_id",
+                  "encoding_strategy_id"
+                ],
+                "properties": {
+                  "mnemonic": {
+                    "type": "string"
+                  },
+                  "operand_form": {
+                    "const": "gpr_rr_mem_imm"
+                  },
+                  "descriptor_kind": {
+                    "const": "alu_group_extension"
+                  },
+                  "descriptor_hex": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{4}$"
+                  },
+                  "operand_contract_id": {
+                    "const": 3
+                  },
+                  "encoding_strategy_id": {
+                    "const": 3
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "mnemonic",
+                  "operand_form",
+                  "descriptor_kind",
+                  "descriptor_hex",
+                  "operand_contract_id",
+                  "encoding_strategy_id"
+                ],
+                "properties": {
+                  "mnemonic": {
+                    "type": "string"
+                  },
+                  "operand_form": {
+                    "const": "gpr_rr_mem_imm"
+                  },
+                  "descriptor_kind": {
+                    "const": "test_opcode_pair"
+                  },
+                  "descriptor_hex": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{4}$"
+                  },
+                  "operand_contract_id": {
+                    "const": 3
+                  },
+                  "encoding_strategy_id": {
+                    "const": 4
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "mnemonic",
+                  "operand_form",
+                  "descriptor_kind",
+                  "descriptor_hex",
+                  "operand_contract_id",
+                  "encoding_strategy_id"
+                ],
+                "properties": {
+                  "mnemonic": {
+                    "type": "string"
+                  },
+                  "operand_form": {
+                    "const": "label"
+                  },
+                  "descriptor_kind": {
+                    "enum": [
+                      "jcc_relaxation",
+                      "jmp_relaxation",
+                      "call_rel32"
+                    ]
+                  },
+                  "descriptor_hex": {
+                    "type": "string",
+                    "pattern": "^(?:[0-9a-f]{2}){1,2}$"
+                  },
+                  "operand_contract_id": {
+                    "const": 4
+                  },
+                  "encoding_strategy_id": {
+                    "enum": [
+                      5,
+                      7
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "mnemonic",
+                  "operand_form",
+                  "descriptor_kind",
+                  "descriptor_hex",
+                  "operand_contract_id",
+                  "encoding_strategy_id"
+                ],
+                "properties": {
+                  "mnemonic": {
+                    "type": "string",
+                    "enum": [
+                      "mul",
+                      "imul",
+                      "div",
+                      "idiv"
+                    ]
+                  },
+                  "operand_form": {
+                    "const": "gpr_single"
+                  },
+                  "descriptor_kind": {
+                    "const": "group3_opcode_extension"
+                  },
+                  "descriptor_hex": {
+                    "type": "string",
+                    "pattern": "^f60[4-7]$"
+                  },
+                  "operand_contract_id": {
+                    "const": 5
+                  },
+                  "encoding_strategy_id": {
+                    "const": 6
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "remaining_forms": {
+          "const": "specialized_handlers"
+        },
+        "operand_contracts": {
+          "type": "object",
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "properties": {
+            "0": {
+              "const": "specialized_handler"
+            },
+            "1": {
+              "const": "zero_operands"
+            },
+            "2": {
+              "const": "typed_data_expression_list"
+            },
+            "3": {
+              "const": "same_width_gpr_rr_memory_or_immediate"
+            },
+            "4": {
+              "const": "label_target"
+            },
+            "5": {
+              "const": "single_gpr_r8_or_r64"
+            },
+            "6": {
+              "const": "stack_register_or_push_immediate"
+            }
+          },
+          "additionalProperties": false
+        },
+        "encoding_strategies": {
+          "type": "object",
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "properties": {
+            "0": {
+              "const": "specialized_handler"
+            },
+            "1": {
+              "const": "fixed_opcode_bytes"
+            },
+            "2": {
+              "const": "opcode_plus_register_low3_rex_b"
+            },
+            "3": {
+              "const": "alu_gpr_rr_memory_or_immediate_template"
+            },
+            "4": {
+              "const": "test_gpr_rr_memory_or_immediate_template"
+            },
+            "5": {
+              "const": "rel8_rel32_branch_relaxation"
+            },
+            "6": {
+              "const": "group3_opcode_extension"
+            },
+            "7": {
+              "const": "call_rel32"
+            },
+            "8": {
+              "const": "typed_data_little_endian"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "intermediate_representation": {
+      "type": "object",
+      "required": [
+        "version",
+        "record_bytes",
+        "max_statements",
+        "record_fields",
+        "statement_kinds",
+        "isa_dispatch",
+        "operand_representation",
+        "typed_operand_nodes",
+        "operand_node_bytes",
+        "operand_slots_per_statement",
+        "max_operand_nodes",
+        "operand_node_fields",
+        "operand_node_kinds",
+        "expression_ast_nodes",
+        "memory_node_layout",
+        "expression_ast"
+      ],
+      "properties": {
+        "version": {
+          "const": 2
+        },
+        "record_bytes": {
+          "const": 4
+        },
+        "max_statements": {
+          "const": 196607
+        },
+        "record_fields": {
+          "const": [
+            "source_offset_u18",
+            "kind_u8",
+            "isa_index_u6"
+          ]
+        },
+        "statement_kinds": {
+          "type": "object",
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "255"
+          ],
+          "properties": {
+            "0": {
+              "const": "blank_or_comment"
+            },
+            "1": {
+              "const": "label"
+            },
+            "2": {
+              "const": "equ"
+            },
+            "3": {
+              "const": "data"
+            },
+            "4": {
+              "const": "instruction"
+            },
+            "255": {
+              "const": "unknown"
+            }
+          },
+          "additionalProperties": false
+        },
+        "isa_dispatch": {
+          "const": "cached-isa-record-index"
+        },
+        "operand_representation": {
+          "const": "typed-register-width-plus-expression-ast"
+        },
+        "typed_operand_nodes": {
+          "const": true
+        },
+        "operand_node_bytes": {
+          "const": 8
+        },
+        "operand_slots_per_statement": {
+          "const": 2
+        },
+        "max_operand_nodes": {
+          "const": 393214
+        },
+        "operand_node_fields": {
+          "const": [
+            "kind_u8",
+            "register_or_reserved_u8",
+            "token_length_u8",
+            "source_offset_in_line_u32",
+            "reserved_u8"
+          ]
+        },
+        "operand_node_kinds": {
+          "type": "object",
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "properties": {
+            "1": {
+              "const": "r64_register"
+            },
+            "2": {
+              "const": "r8_register"
+            },
+            "3": {
+              "const": "memory_source_span_with_cached_address_fields"
+            },
+            "4": {
+              "const": "immediate_expression_source_span_with_ast_reference"
+            },
+            "5": {
+              "const": "r32_register"
+            },
+            "6": {
+              "const": "r16_register"
+            }
+          },
+          "additionalProperties": false
+        },
+        "expression_ast_nodes": {
+          "const": true
+        },
+        "memory_node_layout": {
+          "type": "object",
+          "required": [
+            "record_bytes",
+            "fields",
+            "packed_index_scale_flags",
+            "address_components"
+          ],
+          "properties": {
+            "record_bytes": {
+              "const": 8
+            },
+            "fields": {
+              "const": [
+                "kind_u8",
+                "base_register_index_u8",
+                "source_token_length_u8",
+                "source_offset_in_line_u32",
+                "packed_index_scale_flags_u8"
+              ]
+            },
+            "packed_index_scale_flags": {
+              "type": "object",
+              "required": [
+                "index_register_index",
+                "scale_code",
+                "has_index",
+                "reserved"
+              ],
+              "properties": {
+                "index_register_index": {
+                  "const": "bits_0_3"
+                },
+                "scale_code": {
+                  "const": "bits_4_5; 0=1, 1=2, 2=4, 3=8"
+                },
+                "has_index": {
+                  "const": "bit_6"
+                },
+                "reserved": {
+                  "const": "bit_7; zero"
+                }
+              },
+              "additionalProperties": false
+            },
+            "address_components": {
+              "const": [
+                "base_register",
+                "optional_index_register",
+                "optional_scale",
+                "displacement_expression_ast"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "expression_ast": {
+          "type": "object",
+          "required": [
+            "version",
+            "node_bytes",
+            "max_nodes",
+            "node_ids",
+            "node_fields",
+            "node_kinds",
+            "binary_operator_codes",
+            "payload_layout",
+            "operand_metadata",
+            "scope",
+            "reevaluation",
+            "legacy_expression_paths",
+            "generic_expression_cache"
+          ],
+          "properties": {
+            "version": {
+              "const": 1
+            },
+            "node_bytes": {
+              "const": 16
+            },
+            "max_nodes": {
+              "const": 196608
+            },
+            "node_ids": {
+              "const": "1-based; per-operand contiguous postorder ranges"
+            },
+            "node_fields": {
+              "const": [
+                "kind_u8",
+                "operator_u8",
+                "symbol_length_u8",
+                "reserved_u40",
+                "payload_u64"
+              ]
+            },
+            "node_kinds": {
+              "type": "object",
+              "required": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "properties": {
+                "1": {
+                  "const": "literal_u64"
+                },
+                "2": {
+                  "const": "symbol_name_pool_reference"
+                },
+                "3": {
+                  "const": "binary_operation"
+                },
+                "4": {
+                  "const": "unary_negation"
+                }
+              },
+              "additionalProperties": false
+            },
+            "binary_operator_codes": {
+              "type": "object",
+              "required": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "properties": {
+                "1": {
+                  "const": "add"
+                },
+                "2": {
+                  "const": "subtract"
+                },
+                "3": {
+                  "const": "shift_left"
+                },
+                "4": {
+                  "const": "logical_shift_right"
+                },
+                "5": {
+                  "const": "bitwise_and"
+                },
+                "6": {
+                  "const": "bitwise_or"
+                }
+              },
+              "additionalProperties": false
+            },
+            "payload_layout": {
+              "type": "object",
+              "required": [
+                "literal",
+                "symbol",
+                "binary",
+                "unary"
+              ],
+              "properties": {
+                "literal": {
+                  "const": "unsigned_u64_value"
+                },
+                "symbol": {
+                  "const": "pointer_to_immutable_name_pool_copy"
+                },
+                "binary": {
+                  "const": "left_node_id_u32_low_right_node_id_u32_high"
+                },
+                "unary": {
+                  "const": "child_node_id_u64"
+                }
+              },
+              "additionalProperties": false
+            },
+            "operand_metadata": {
+              "type": "object",
+              "required": [
+                "bytes_per_slot",
+                "fields",
+                "range"
+              ],
+              "properties": {
+                "bytes_per_slot": {
+                  "const": 8
+                },
+                "fields": {
+                  "const": [
+                    "start_node_id_u32",
+                    "root_node_id_u32"
+                  ]
+                },
+                "range": {
+                  "const": "1-based inclusive; zero means no AST"
+                }
+              },
+              "additionalProperties": false
+            },
+            "scope": {
+              "const": [
+                "instruction_immediate",
+                "memory_displacement",
+                "EQU",
+                "DB",
+                "DW",
+                "DD",
+                "DQ"
+              ]
+            },
+            "reevaluation": {
+              "const": "AST roots are cached by absolute source-byte offset; symbol values are resolved again on every evaluation"
+            },
+            "legacy_expression_paths": {
+              "const": []
+            },
+            "generic_expression_cache": {
+              "type": "object",
+              "required": [
+                "key",
+                "entry_bytes",
+                "capacity",
+                "contexts"
+              ],
+              "properties": {
+                "key": {
+                  "const": "absolute_source_byte_offset"
+                },
+                "entry_bytes": {
+                  "const": 8
+                },
+                "capacity": {
+                  "const": 196608
+                },
+                "contexts": {
+                  "const": [
+                    "EQU",
+                    "DB",
+                    "DW",
+                    "DD",
+                    "DQ"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "register_model": {
+      "type": "object",
+      "required": [
+        "width_classes",
+        "name_table_ranges",
+        "operand_ir_kinds",
+        "implemented_instruction_widths",
+        "memory_base_register_class",
+        "memory_index_register_class",
+        "mixed_width_register_operands",
+        "low_byte_alias_policy",
+        "unimplemented_width_families"
+      ],
+      "properties": {
+        "width_classes": {
+          "const": [
+            "r8",
+            "r16",
+            "r32",
+            "r64"
+          ]
+        },
+        "name_table_ranges": {
+          "type": "object",
+          "required": [
+            "r64",
+            "r8",
+            "r32",
+            "r16"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "operand_ir_kinds": {
+          "type": "object",
+          "required": [
+            "r64",
+            "r8",
+            "r32",
+            "r16"
+          ],
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "implemented_instruction_widths": {
+          "type": "object",
+          "required": [
+            "MOV",
+            "LEA",
+            "XCHG",
+            "ALU",
+            "TEST",
+            "UNARY",
+            "CMOVCC",
+            "BSWAP",
+            "MOVZX",
+            "MOVSX"
+          ],
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "memory_base_register_class": {
+          "const": "r64"
+        },
+        "memory_index_register_class": {
+          "const": "r64"
+        },
+        "mixed_width_register_operands": {
+          "const": "rejected"
+        },
+        "unimplemented_width_families": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "low_byte_alias_policy": {
+          "type": "object",
+          "required": [
+            "forced_rex",
+            "extended_rex_b",
+            "high_byte_registers"
+          ],
+          "properties": {
+            "forced_rex": {
+              "const": [
+                "spl",
+                "bpl",
+                "sil",
+                "dil"
+              ]
+            },
+            "extended_rex_b": {
+              "const": "r8b-r15b"
+            },
+            "high_byte_registers": {
+              "const": "unsupported"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

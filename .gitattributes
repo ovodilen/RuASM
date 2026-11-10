@@ -1,0 +1,9 @@
+*.asm text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.cff text eol=lf
+*.exe binary
+bin/linux-x86_64/ruasm binary
+SHA256SUMS text eol=lf

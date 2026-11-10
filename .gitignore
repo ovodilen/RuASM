@@ -1,0 +1,6 @@
+/build/
+*.tmp
+*.compose.tmp
+*.compose.tmp.compact
+*.compose.tmp.merged
+features.json
